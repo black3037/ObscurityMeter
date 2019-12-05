@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Menu, Button, Icon, Image } from 'semantic-ui-react';
-import { FaUserAstronaut, FaSpotify } from 'react-icons/fa';
 import Spotify from '../../api/Spotify';
 import { UserInfoContext } from '../../store/Store'
 
@@ -29,7 +28,7 @@ function MainMenu(props) {
     }
   },[userInfo.isLoggedIn])
 
-  let addSpotifyLoginButton = <></>
+  let addSpotifyLoginButton = <></>;
   if (!userInfo.isLoggedIn) {
     addSpotifyLoginButton = 
     <><Menu.Item>
@@ -45,6 +44,22 @@ function MainMenu(props) {
     </>;
   }
 
+  let addTwitterButton = <></>;
+  if (userInfo.hasTestBeenRun) {
+    let baseUri = 'https://twitter.com/intent/tweet?text='
+    let displayStr = encodeURI('My music taste is ' + userInfo.obscurityScore + '%' + ' obscure. How obscure is your taste');
+    let formedUrl = baseUri + displayStr;
+    addTwitterButton = 
+    <><Menu.Item>
+        <a target="_blank" href={formedUrl}>
+        <Button color='twitter'>
+          <Icon name='twitter' /> Tweet Score
+        </Button>
+        </a>
+      </Menu.Item>
+    </>;
+  }
+
   return(
       <Menu size='tiny'>
         <Menu.Item
@@ -52,6 +67,7 @@ function MainMenu(props) {
           active=''
           onClick='#'
         />
+        {addTwitterButton}
         <Menu.Menu position='right'>
           {addSpotifyLoginButton}
           <Menu.Item>
