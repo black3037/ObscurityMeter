@@ -15,6 +15,12 @@ import { UserInfoContext } from '../../store/Store';
 
 
 function Heading(props) {
+
+    const scoreStyle = {
+        fontSize: 20,
+        color: 'black'
+    }
+
     const [userInfo,setUserInfo] = useContext(UserInfoContext);
 
     const welcomeMsg = 'Welcome to Obscurity Meter'
@@ -26,7 +32,10 @@ function Heading(props) {
     } else if (userInfo.isLoggedIn && !userInfo.hasTestBeenRun) {
         displayState = <RunTest name={userInfo.name} setUserInfo={setUserInfo}/>;
     } else if (userInfo.isLoggedIn && userInfo.hasTestBeenRun) {
-        displayState = <Score score={userInfo.obscurityScore === null ? 'Not Rated' : userInfo.obscurityScore}/>;
+        let score = <><span>{userInfo.obscurityScore}</span><span style={scoreStyle}>/100</span></>
+        displayState = <Score 
+            score={userInfo.obscurityScore === null ? 'Not Rated' : score} 
+            hasTestBeenRun={userInfo.hasTestBeenRun}/>;
     } else {
         displayState = <UserLogin />;
     }

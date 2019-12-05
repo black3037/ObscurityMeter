@@ -50,13 +50,13 @@ function RunTest(props) {
                     return tracks
                 })
                 .then(tracks => {
-                    let [mean, median, mode] = calculateArrayStatistics(tracks)
+                    let [mean, median, obscurity] = calculateArrayStatistics(tracks)
                     setUserInfo(prevState => ({ ...prevState, 
                         tracks: tracks,
                         isLoading: false,
                         mean: mean,
                         median: median,
-                        obscurityScore: median
+                        obscurityScore: obscurity
                     }))
                 })
         })
@@ -84,8 +84,9 @@ function RunTest(props) {
         });
         median = arr.length !== 0 ? 
         arr.length % 2 ? median[half] : (median[half-1]+median[half]/ 2.0) : 0 ;
-    
-        return [mean, median, mode]
+        let obscurity = 100 - median;
+
+        return [mean, median, obscurity]
     }
 
     function runTestCallback() {
