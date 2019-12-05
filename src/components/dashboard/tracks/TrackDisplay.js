@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { 
     Grid,
     Segment,
-    Sticky,
-    Container,
-    Search
+    Search,
+    Radio,
+    Rail
  } from 'semantic-ui-react';
 import Track from './Track';
 import _ from 'lodash/core';
@@ -12,10 +12,10 @@ import _ from 'lodash/core';
 function TrackDisplay(props) {
 
     // Local state
-    const searchInitText =  'Search for a song or aritst';
     const [searchLoading,setSearchLoading] = useState(false);
     const [searchValue,setSearchValue] = useState('');
     const [displayTracks,setDisplayTracks] = useState([]);
+    const [toggleButton,setToggleButton] = useState(true);
 
     useEffect(()=>{
         let propTracks = props.tracks.map(track => {
@@ -28,9 +28,7 @@ function TrackDisplay(props) {
                 />
             );
         });
-        console.log(propTracks)
-        setDisplayTracks(propTracks)
-        console.log('Used Effect')
+        setDisplayTracks(toggleButton ? propTracks.slice(0,100) : propTracks)
 
     },[props.tracks])
 
@@ -52,11 +50,12 @@ function TrackDisplay(props) {
                 />
             );
         }))
+        setSearchLoading(false);
     }
 
     function handleSearchChange(e,{value}) {
-        
         setSearchValue(value);
+        setSearchLoading(true);
         debounce(500,value,filterTracks);
     }
 
@@ -66,19 +65,40 @@ function TrackDisplay(props) {
         },time)
     }
 
-    let results = [];
-    
+    function trackResultsSizeHandler() {
+        let propTracks = props.tracks.map(track => {
+            return(
+                <Track 
+                    name={track.name} 
+                    artist={track.artist} 
+                    popularity={track.popularity} 
+                    image={track.image}
+                />
+            );
+        });
+        setToggleButton(toggleButton ? false : true)
+        setDisplayTracks(toggleButton ? propTracks : propTracks.slice(0,100))
+    }
+
     return(
         <Grid.Column>
             <Segment loading={props.isLoading}>
                 <h3>Track Breakdown</h3>
+                <Radio 
+                    toggle
+                    onChange={trackResultsSizeHandler}
+                    checked={toggleButton}
+                    label='Display only the first 100 results'
+                />
+                <br></br>
+                <br></br>
                 <Search 
                 size='small' 
                 loading={searchLoading}
-                onResultSelect=''
                 onSearchChange={handleSearchChange}
-                results={results}
-                value={searchValue}/>
+                results=''
+                value={searchValue}
+                open={false}/>
                 <br></br>
                 {displayTracks}
             </Segment>
