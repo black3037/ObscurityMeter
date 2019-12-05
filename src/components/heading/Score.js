@@ -14,7 +14,6 @@ const scoreStyle = {
 }
 
 function Score(props) {
-    console.log('score props',props)
     return(
         <Segment placeholder>
             <Header icon>

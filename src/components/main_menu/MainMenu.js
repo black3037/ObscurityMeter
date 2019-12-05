@@ -10,7 +10,6 @@ function MainMenu(props) {
   const [userImage,setUserImage] = useState(<Icon name='user circle' size='large' />)
 
   useEffect(() => {
-    console.log('MainMenu',userInfo.isLoggedIn)
     if (userInfo.isLoggedIn) {
       Spotify.getMe()
       .then(info => {

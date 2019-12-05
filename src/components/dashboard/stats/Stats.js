@@ -31,8 +31,6 @@ function Stats(props) {
       let mostPopularTrackName = mostPopularTrack === -1 ? '' : props.tracks[mostPopularTrack].name;
       let mostPopularTrackArtist = mostPopularTrack === -1 ? '' : props.tracks[mostPopularTrack].artist;
 
-      console.log('least',leastPopularTrack)
-      console.log('most',mostPopularTrack)
       return(
         <Grid.Column>
           <Segment loading={props.isLoading}>

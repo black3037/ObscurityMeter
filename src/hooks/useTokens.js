@@ -5,11 +5,8 @@ import { FaInfo } from 'react-icons/fa';
 function useTokens(userInfo,setUserInfo) {
     
     let tokens = getHashParams();
-    console.log('tokens',tokens)
     let loggedIn = tokens[0] !== null ? true : false;
-    console.log('loggedin',loggedIn)
     useEffect(() => {
-        console.log('useEffect',loggedIn)
         setUserInfo(prevState => ({ 
             ...prevState,                
             access_token: tokens[0],                 
