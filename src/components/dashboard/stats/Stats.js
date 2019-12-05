@@ -35,7 +35,6 @@ function Stats(props) {
       console.log('most',mostPopularTrack)
       return(
         <Grid.Column>
-          <Sticky context={props.ref}>
           <Segment loading={props.isLoading}>
             <h3>Obscurity Score Breakdown</h3>
             <div>
@@ -82,7 +81,6 @@ function Stats(props) {
       </Item>
       </div>
           </Segment>
-          </Sticky>
         </Grid.Column>
       )
 }
