@@ -23,7 +23,6 @@ function Heading(props) {
 
     const [userInfo,setUserInfo] = useContext(UserInfoContext);
 
-    const welcomeMsg = 'Welcome to Obscurity Meter'
     // Determine what component is displayed to the user based on login and
     // test statuses
     let displayState = <UserLogin />;
@@ -44,7 +43,6 @@ function Heading(props) {
         <Container>
             <Grid columns={1}>
                 <Grid.Column centered>
-                    <h2>{welcomeMsg}</h2>
                     {displayState}
                 </Grid.Column>
             </Grid>

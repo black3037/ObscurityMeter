@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import MainMenu from './components/main_menu/MainMenu';
 import Dashboard from './components/dashboard/Dashboard';
 import Heading from './components/heading/Heading';
+import InfoContainer from './components/info/InfoContainer'
 import useTokens from './hooks/useTokens';
 import { UserInfoContext } from './store/Store';
 
@@ -36,6 +37,7 @@ function App() {
       <MainMenu />
       <Heading />
       <Dashboard />
+      <InfoContainer />
     </UserInfoContext.Provider>
   );
 }

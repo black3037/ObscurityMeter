@@ -12,8 +12,9 @@ function UserLogin(props) {
             <Header icon>
             <h1>&#128075;</h1>
             <h2>Hey there!</h2>
-            <br></br> 
-            In order to get your score you must first login to Spotify. Click the login to Spotify button below to get started.
+            <Header.Subheader>
+            To get started you first have to login with Spotify
+            </Header.Subheader>
             </Header>
             <Segment.Inline>
                 <Button  

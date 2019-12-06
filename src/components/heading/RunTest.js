@@ -104,7 +104,10 @@ function RunTest(props) {
         <Segment placeholder>
             <Header icon>
             <Icon name='music' />
-            Welcome {props.name}, click the button below to calculate your score.
+            Welcome {props.name}
+            <Header.Subheader>
+            Click the button below to calculate your score.
+            </Header.Subheader> 
             </Header>
             <Segment.Inline>
                 <Button fluid
